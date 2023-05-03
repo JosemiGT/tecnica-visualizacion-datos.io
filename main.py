@@ -9,7 +9,7 @@ CONST_URL_DATA = "https://zenodo.org/record/7339445/files/IMDB%20Selection%20Dat
 CONST_HISTOGRAM_PATH = "docs/histogram.png"
 CONST_RADARCHAT_PATH = "docs/radarchat.png"
 CONST_SPARKLINE_PATH = "docs/sparkline.html"
-
+CONST_LIMIT = 50
 
 def calculate_mean(df, genre):
 
@@ -50,7 +50,7 @@ def generate_radar_chat(values, description_values):
 
 def sparkline(data, figsize=(4, 0.25), **kwags):
 
-    data = list(data)
+    data = list(data[:CONST_LIMIT])
 
     fig, ax = plt.subplots(1, 1, figsize=figsize, **kwags)
     ax.plot(data)
@@ -70,11 +70,11 @@ def sparkline(data, figsize=(4, 0.25), **kwags):
 
     return base64.b64encode(img.read()).decode("UTF-8")
 
-def generate_sparkline(values):
+def generate_sparkline(genres, values):
 
     with open(CONST_SPARKLINE_PATH, "w") as file:
-        for value in values:
-            file.write('<div><img src="data:image/png;base64,{}"/></div>'.format(sparkline(value)))
+        for index, value in enumerate(values):
+            file.write('<div><p>{}</p><img src="data:image/png;base64,{}"/></div>'.format(genres[index],sparkline(value)))
 
 if __name__ == "__main__":
 
@@ -93,6 +93,6 @@ if __name__ == "__main__":
     
     # generate_histogram(dataSet['score'])
     # generate_radar_chat(genre_means, genres_list)
-    generate_sparkline(genre_scores)
+    generate_sparkline(genres_list, genre_scores)
     
 
