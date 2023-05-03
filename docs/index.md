@@ -29,5 +29,5 @@ A continuación, vamos a observar un ejemplo de como sería un "*Radar Chart*", 
 Por último, vamos a enseñar como representamos mediante "*Sparklines*" (Pequeños gráficos secuenciales) la evolución de las puntuaciones por tipo de género de películas:
 
 ```html
-!include sparklines.html
+!include sparkline.html
 ```
