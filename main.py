@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import plotly.express as px
 import base64
 
+CONST_URL_DATA = "https://zenodo.org/record/7339445/files/IMDB%20Selection%20Database.csv?download=1"
 CONST_HISTOGRAM_PATH = "docs/histogram.png"
 CONST_RADARCHAT_PATH = "docs/radarchat.png"
 CONST_SPARKLINE_PATH = "docs/sparkline.html"
@@ -21,12 +22,21 @@ def calculate_mean(df, genre):
 
     return sum_value/iterator
 
+def get_score_by_genre(df, genre):
+
+    score_genre = []
+
+    for index, row in df.iterrows():
+        if genre in str(row['genres']):
+            score_genre.append(float(row['score']))
+
+    return score_genre
 
 def generate_histogram(values):
 
     plt.hist(x=values)
     plt.ylabel('Puntuaciones')
-    plt.title('Histograma')
+    plt.title('Histograma de puntuaciones de películas recogidos en IMDB')
     plt.savefig(CONST_HISTOGRAM_PATH)
 
 def generate_radar_chat(values, description_values):
@@ -34,6 +44,7 @@ def generate_radar_chat(values, description_values):
         r=values,
         theta=description_values))
     fig = px.line_polar(data_frame, r='r', theta='theta', line_close=True)
+    fig.show()
     fig.write_image(CONST_RADARCHAT_PATH)
 
 def sparkline(data, figsize=(4, 0.25), **kwags):
@@ -66,20 +77,21 @@ def generate_sparkline(values):
 
 if __name__ == "__main__":
 
-    url = "https://zenodo.org/record/7339445/files/IMDB%20Selection%20Database.csv?download=1"
-
-    dataSet = pd.read_csv(url)
+    dataSet = pd.read_csv(CONST_URL_DATA)
 
     genres_list =[genre.replace("'", "") for genre in set(
         np.concatenate(
         dataSet['genres'].apply(lambda x: x[1:-1].split(', ')).values))]
 
-    genre_means = list()
+    genre_means = []
+    genre_scores = []
 
     for genre in genres_list:
         genre_means.append(calculate_mean(dataSet, genre))
+        genre_scores.append(get_score_by_genre(dataSet, genre))
     
     generate_histogram(dataSet['score'])
     generate_radar_chat(genre_means, genres_list)
-
+    generate_sparkline(genre_scores)
+    
 
