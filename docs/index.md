@@ -18,5 +18,5 @@ Para el presente trabajo académico, se ha procedido a utilizar un data set de e
 
 El primer ejemplo que vamos a visualizar, se trata de un histograma. Como los datos de puntuación de películas tienen una puntuación, vamos a representar el histograma de la puntuación de las mismas.
 
-[Histograma](./histogram.png)
+![Histograma](./histogram.png)
 
