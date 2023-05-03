@@ -23,3 +23,9 @@ El primer ejemplo que vamos a visualizar, se trata de un histograma. Como los da
 A continuación, vamos a observar un ejemplo de como sería un "*Radar Chart*", para ello vamos a usar las puntuaciones medias de cada género de película del data set anterior:
 
 ![RadarChart](./radarchart.png)
+
+## Sparklines
+
+Por último, vamos a enseñar como representamos mediante "*Sparklines*" (Pequeños gráficos secuenciales) la evolución de las puntuaciones por tipo de género de películas:
+
+![Sparklines](./sparkline.html)

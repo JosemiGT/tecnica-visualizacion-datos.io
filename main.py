@@ -3,6 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt  
 import plotly.express as px
 import base64
+import io
 
 CONST_URL_DATA = "https://zenodo.org/record/7339445/files/IMDB%20Selection%20Database.csv?download=1"
 CONST_HISTOGRAM_PATH = "docs/histogram.png"
@@ -62,7 +63,7 @@ def sparkline(data, figsize=(4, 0.25), **kwags):
 
     ax.fill_between(range(len(data)), data, len(data)*[min(data)], alpha=0.1)
 
-    img = BytesIO()
+    img = io.BytesIO()
     plt.savefig(img, transparent=True, bbox_inches='tight')
     img.seek(0)
     plt.close()
@@ -90,8 +91,8 @@ if __name__ == "__main__":
         genre_means.append(calculate_mean(dataSet, genre))
         genre_scores.append(get_score_by_genre(dataSet, genre))
     
-    generate_histogram(dataSet['score'])
-    generate_radar_chat(genre_means, genres_list)
+    # generate_histogram(dataSet['score'])
+    # generate_radar_chat(genre_means, genres_list)
     generate_sparkline(genre_scores)
     
 
