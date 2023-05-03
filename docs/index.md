@@ -3,6 +3,7 @@
 - **Autor:** José Miguel Gamarro Tornay.
 - **Asignatura:** Visualización de datos.
 - **Máster de ciencia de datos**
+- **Universitat Oberta de Catalunya**
 
 ## Descripción
 
