@@ -36,7 +36,8 @@ def get_score_by_genre(df, genre):
 def generate_histogram(values):
 
     plt.hist(x=values)
-    plt.ylabel('Puntuaciones')
+    plt.ylabel('Frecuencia')
+    plt.xlabel('Puntuaciones')
     plt.title('Histograma de puntuaciones de películas recogidos en IMDB')
     plt.savefig(CONST_HISTOGRAM_PATH)
 
@@ -91,7 +92,7 @@ if __name__ == "__main__":
         genre_means.append(calculate_mean(dataSet, genre))
         genre_scores.append(get_score_by_genre(dataSet, genre))
     
-    # generate_histogram(dataSet['score'])
+    generate_histogram(dataSet['score'])
     # generate_radar_chat(genre_means, genres_list)
     generate_sparkline(genres_list, genre_scores)
     
